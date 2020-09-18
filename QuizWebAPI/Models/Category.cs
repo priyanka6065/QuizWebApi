@@ -10,7 +10,7 @@ namespace QuizWebAPI.Models
     public class Category
     {
         [Key]
-        public int CategoryI { get; set; }
+        public int CategoryId { get; set; }
 
         [Column(TypeName = "varchar(50)")]
         public string CategoryName { get; set; }
