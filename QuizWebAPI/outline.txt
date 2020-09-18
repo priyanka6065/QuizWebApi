@@ -1,0 +1,12 @@
+﻿- Login Page
+- Registration Page
+- Questions add/update/delete
+- Quiz page
+- Result Page
+- Category Page
+
+Table in Database
+- Question
+- Answers
+- Users
+- UsersQuiz
