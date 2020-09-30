@@ -26,7 +26,7 @@ namespace QuizWebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Answer>> GetAnawer(int id)
+        public async Task<ActionResult<Answer>> GetAnswer(int id)
         {
             var answer = await _context.Answers.FindAsync(id);
 
@@ -36,6 +36,13 @@ namespace QuizWebAPI.Controllers
             }
 
             return answer;
+        }
+
+        [HttpGet()]
+        [Route("GetAnswersByQuestionId/{questionId}")]
+        public async Task<ActionResult<IEnumerable<Answer>>> GetAnswersByQuestionId(int questionId)
+        {
+            return await _context.Answers.Where(e => e.QuestionId == questionId).ToListAsync();
         }
 
         [HttpPost]

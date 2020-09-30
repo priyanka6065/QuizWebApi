@@ -26,10 +26,22 @@ namespace QuizWebAPI.Controllers
             return await _context.Users.ToListAsync();
         }
 
-        [HttpGet("{id}")]
+       [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return user;
+        }
+
+        [HttpPost()]
+        [Route("Login")]
+        public async Task<ActionResult<User>> Login(User _user)
+        {
+            var user = await _context.Users.Where(x => (x.UserName == _user.UserName && x.PassWord == _user.PassWord)).FirstOrDefaultAsync();
             if (user == null)
             {
                 return NotFound();
@@ -64,6 +76,7 @@ namespace QuizWebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            user.Roll = "user";
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);

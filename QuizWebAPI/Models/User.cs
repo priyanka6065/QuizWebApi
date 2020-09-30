@@ -20,12 +20,15 @@ namespace QuizWebAPI.Models
 
         [Column(TypeName = "varchar(50)")]
         public string FirstName { get; set; }
-
+        
         [Column(TypeName = "varchar(50)")]
         public string LastName { get; set; }
 
         [Column(TypeName = "varchar(50)")]
         public string Email { get; set; }
+
+        [Column(TypeName = "varchar(50)")]
+        public string Roll { get; set; }
 
         public ICollection<UserQuiz> UserQuizzes { get; set; }
 

@@ -10,8 +10,8 @@ using QuizWebAPI.Models;
 namespace QuizWebAPI.Migrations
 {
     [DbContext(typeof(QuizDbContext))]
-    [Migration("20200908224854_temp1")]
-    partial class temp1
+    [Migration("20200923211858_new db")]
+    partial class newdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace QuizWebAPI.Migrations
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("QuestionId")
+                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
                     b.HasKey("AnswerId");
@@ -66,7 +66,7 @@ namespace QuizWebAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("Point")
@@ -99,6 +99,9 @@ namespace QuizWebAPI.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("PassWord")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Roll")
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("UserName")
@@ -140,14 +143,18 @@ namespace QuizWebAPI.Migrations
                 {
                     b.HasOne("QuizWebAPI.Models.Question", "Question")
                         .WithMany("Answers")
-                        .HasForeignKey("QuestionId");
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("QuizWebAPI.Models.Question", b =>
                 {
                     b.HasOne("QuizWebAPI.Models.Category", "Category")
                         .WithMany("Questions")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("QuizWebAPI.Models.UserQuiz", b =>

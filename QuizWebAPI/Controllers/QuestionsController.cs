@@ -29,10 +29,11 @@ namespace QuizWebAPI.Controllers
                         join Cat in _context.Categories on Que.CategoryId equals Cat.CategoryId 
                         select new { Que.QuestionId, Que.QueDetail, Que.Point, Que.CategoryId, Category = new Category { CategoryId = Cat.CategoryId, CategoryName =  Cat.CategoryName } };
 
-            return await query.ToListAsync();
+            return await query.ToListAsync();            
         }
 
         [HttpGet("{id}")]
+        [Route("GetQuestionById/{id}")]
         public async Task<ActionResult<Question>> GetQuestion(int id)
         {
             var question = await _context.Questions.FindAsync(id);
@@ -43,6 +44,15 @@ namespace QuizWebAPI.Controllers
             }
 
             return question;
+        }
+
+        [HttpGet("{categoryId}")]
+        [Route("GetQuestionsByCategoryId/{categoryId}")]
+        public async Task<ActionResult<IEnumerable<Question>>> GetQuestionsByCategoryId(int categoryId)
+        {
+            //return await _context.Questions.Where(x => x.CategoryId == categoryId).ToListAsync();
+            return await _context.Questions.Where(x => x.CategoryId == categoryId).Include(y => y.Answers).ToListAsync();
+            //return _context.Projects.Include(p => p.Tasks).ToList();
         }
 
         [HttpPost]

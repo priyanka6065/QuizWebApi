@@ -2,7 +2,7 @@
 
 namespace QuizWebAPI.Migrations
 {
-    public partial class temp1 : Migration
+    public partial class newdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,8 @@ namespace QuizWebAPI.Migrations
                     PassWord = table.Column<string>(type: "varchar(50)", nullable: true),
                     FirstName = table.Column<string>(type: "varchar(50)", nullable: true),
                     LastName = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Email = table.Column<string>(type: "varchar(50)", nullable: true)
+                    Email = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Roll = table.Column<string>(type: "varchar(50)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,7 +45,7 @@ namespace QuizWebAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QueDetail = table.Column<string>(type: "varchar(200)", nullable: true),
                     Point = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: true)
+                    CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +55,7 @@ namespace QuizWebAPI.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,7 +66,7 @@ namespace QuizWebAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AnsOptions = table.Column<string>(type: "varchar(50)", nullable: true),
                     IsCorrect = table.Column<bool>(nullable: false),
-                    QuestionId = table.Column<int>(nullable: true)
+                    QuestionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,7 +76,7 @@ namespace QuizWebAPI.Migrations
                         column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "QuestionId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
