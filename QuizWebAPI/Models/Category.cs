@@ -16,6 +16,5 @@ namespace QuizWebAPI.Models
         public string CategoryName { get; set; }
 
         public ICollection<Question> Questions { get; set; }
-
     }
 }

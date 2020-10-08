@@ -2,7 +2,7 @@
 
 namespace QuizWebAPI.Migrations
 {
-    public partial class newdb : Migration
+    public partial class initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -85,9 +85,10 @@ namespace QuizWebAPI.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: true),
-                    QuestionId = table.Column<int>(nullable: true),
-                    AnswerId = table.Column<int>(nullable: true)
+                    QuizId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    QuestionId = table.Column<int>(nullable: false),
+                    AnswerId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,19 +98,19 @@ namespace QuizWebAPI.Migrations
                         column: x => x.AnswerId,
                         principalTable: "Answers",
                         principalColumn: "AnswerId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserQuizzes_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "QuestionId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserQuizzes_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
