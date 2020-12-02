@@ -21,5 +21,7 @@ namespace QuizWebAPI.Models
         public DbSet<User> Users { get; set; }
 
         public DbSet<UserQuiz> UserQuizzes { get; set; }
+
+        public DbSet<UserResult> Results { get; set; }
     }
 }

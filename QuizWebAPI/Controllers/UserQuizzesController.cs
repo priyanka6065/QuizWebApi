@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using QuizWebAPI.Models;
 
@@ -69,12 +70,18 @@ namespace QuizWebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserQuiz>> PostUserQuiz(UserQuiz userQuiz)
+        public async Task<ActionResult<UserQuiz>> PostUserQuiz(UserQuiz[] userQuizzes)
         {
-            _context.UserQuizzes.Add(userQuiz);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUserQuiz", new { id = userQuiz.Id }, userQuiz);
+            for (int i = 0; i < userQuizzes.Length; i++)
+            {
+                UserQuiz userQuiz = userQuizzes[i];
+                _context.UserQuizzes.Add(userQuiz);
+                await _context.SaveChangesAsync();
+            }
+
+
+            return CreatedAtAction("GetUserQuizzes", null);
         }
 
         [HttpDelete("{id}")]
@@ -95,6 +102,20 @@ namespace QuizWebAPI.Controllers
         private bool UserQuizExita(int id)
         {
             return _context.UserQuizzes.Any(e => e.Id == id);
+        }
+
+        [HttpGet("{userId}")]
+        [Route("GetResultsByUserId/{userId}")]
+        public async Task<IEnumerable<UserResult>> GetResultsByUserId(int userId)
+        {
+            var param = new SqlParameter("@UserId", 2);
+
+            var students =  await _context.Results.FromSqlRaw("EXEC GetResultsByUserId @UserId={0}", userId).ToListAsync();
+            //if (students == null)
+            //{
+            //    return NotFound();
+            //}
+            return students;
         }
     }
 }
