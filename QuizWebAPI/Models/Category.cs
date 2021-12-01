@@ -15,6 +15,6 @@ namespace QuizWebAPI.Models
         [Column(TypeName = "varchar(50)")]
         public string CategoryName { get; set; }
 
-        public ICollection<Question> Questions { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }

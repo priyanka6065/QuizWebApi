@@ -18,8 +18,9 @@ namespace QuizWebAPI.Models
         public bool IsCorrect { get; set; }
 
         public int QuestionId { get; set; }
-        public Question Question { get; set; }
 
-        public ICollection<UserQuiz> UserQuizzes { get; set; }
+        public virtual Question Question { get; set; }
+
+        public virtual ICollection<UserQuiz> UserQuizzes { get; set; }
     }
 }

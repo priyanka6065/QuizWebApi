@@ -19,10 +19,10 @@ namespace QuizWebAPI.Models
 
         public int CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
-        public ICollection<Answer> Answers { get; set; }
+        public virtual ICollection<Answer> Answers { get; set; }
 
-        public ICollection<UserQuiz> UserQuizzes { get; set; }
+        public virtual ICollection<UserQuiz> UserQuizzes { get; set; }
     }
 }

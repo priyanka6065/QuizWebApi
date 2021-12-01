@@ -30,7 +30,7 @@ namespace QuizWebAPI.Models
         [Column(TypeName = "varchar(50)")]
         public string Roll { get; set; }
 
-        public ICollection<UserQuiz> UserQuizzes { get; set; }
+        public virtual ICollection<UserQuiz> UserQuizzes { get; set; }
 
     }
 }

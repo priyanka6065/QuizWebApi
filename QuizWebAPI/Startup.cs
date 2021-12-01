@@ -41,7 +41,7 @@ namespace QuizWebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors(option => option.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
+            app.UseCors(option => option.WithOrigins("https://priyanka6065.github.io").AllowAnyHeader().AllowAnyMethod());
 
             if (env.IsDevelopment())
             {

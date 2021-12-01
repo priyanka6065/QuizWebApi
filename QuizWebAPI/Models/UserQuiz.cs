@@ -19,10 +19,10 @@ namespace QuizWebAPI.Models
 
         public int AnswerId { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
-        public Question Question { get; set; }
+        public virtual Question Question { get; set; }
 
-        public Answer Answer { get; set; }
+        public virtual Answer Answer { get; set; }
     }
 }
